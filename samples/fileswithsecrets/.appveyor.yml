@@ -1,0 +1,39 @@
+version: 0.3.0-rtm.{build}
+pull_requests:
+  do_not_increment_build_number: true
+branches:
+  only:
+  - master
+nuget:
+  disable_publish_on_pr: true
+build_script:
+  - ps: .\build.ps1 -IsOfficialBuild
+environment:
+  global:
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+    DOTNET_CLI_TELEMETRY_OPTOUT: 1
+test: off
+os: Visual Studio 2019
+artifacts:
+  - path: '.artifacts\*.nupkg'
+    name: Packages
+    type: NuGetPackages
+deploy:
+  - provider: NuGet
+    name: myget
+    artifact: Packages
+    server: https://www.myget.org/F/andrewlock-ci/api/v2/package
+    symbol_server: https://www.myget.org/F/andrewlock-ci/api/v2/package
+    api_key:
+      secure: 7XbdNq38u0JLRNc9pRl35WPi5LZopfYcoCslf7Er/eTreR5mZnGbmY/lVQYcgxI2
+    on:
+      branch: master
+  - provider: NuGet
+    name: production
+    artifact: Packages
+    api_key:
+      secure: 8x0qw1lKfHdErlKppZtJX1sIH9lSGMw1LtHITKA/SM6nijTgakjL421iiZOTDckM
+    on:
+      branch: master
+      appveyor_repo_tag: true
+

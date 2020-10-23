@@ -1,0 +1,32 @@
+{
+  "AppSettings": {
+    "SiteTitle": "Single Form Application"
+  },
+  "Data": {
+    "DefaultConnection": {
+      //"ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-FormiginationUI-262d2095-e923-46a8-be2f-4bc8db6fd0af;Trusted_Connection=True;MultipleActiveResultSets=true"
+
+      "ConnectionString": "Server=MEHEDI\\SQL2008;Database=ops;Trusted_Connection=True;MultipleActiveResultSets=true;User Id=sa;Password=azbd,User Id=SA;Password=hNxX9Qz2"
+HEROKU_API_KEY=dmnsa89dh923
+    }
+  },
+  "Authentication": {
+    "Facebook": {
+      "AppId": "1641922116047977",
+      "AppSecret": "47c4ce6a092b824a0803af38359475cb"
+    },
+    "MicrosoftAccount": {
+      "ClientId": "",
+      "ClientSecret": ""
+    },
+    "Google": {
+      "ClientId": "",
+      "ClientSecret": ""
+    },
+    "Twitter": {
+      "ClientId": "",
+      "ClientSecret": ""
+    }
+
+  }
+}

@@ -1,0 +1,15 @@
+api
+key
+username
+user
+uname
+pw
+password
+pass
+email
+mail
+credentials
+credential
+login
+token
+ConnectionString
