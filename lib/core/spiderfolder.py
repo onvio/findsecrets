@@ -16,6 +16,7 @@ class SpiderFolder():
         excluded_files = ['vendor']
         excluded_files_extentions = ['vendor']
         filepaths = []
+        maxfilesize = [1000]
 
         ## todo: Multi Threading 
         ## todo: Spider SMB Share
