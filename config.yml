@@ -1,0 +1,65 @@
+scanfolder:
+  - 'samples/fileswithsecrets'
+settings:
+  - levenshtein-distance: 20
+  - max-filesize-kb: 1024
+  - min-value-length: 4
+exclude:
+  folders:
+    - vendor
+    - .git
+    - node_modules
+  files:
+    - package.json
+    - package-lock.json
+    - composer.lock
+    - yarn.lock
+  extentions:
+    - .jpg
+    - .png
+    - .woff
+    - .woff2
+    - .svg
+    - .ico
+    - .xlsx
+    - .ttf
+    - .dll
+    - .min.js
+    - .exe
+    - .jpeg
+    - .gif
+    - .jar
+    - .csproj
+    - .gz
+    - .zip
+  values:
+    - none
+    - 'true'
+    - 'false'
+    - 'null'
+    - default
+    - example
+    - username
+    - email
+    - password
+    - foobar
+    - access
+    - mysql
+    - sqlite
+    - $this
+    - HERE
+    - value
+    - string
+    - test
+    - fake
+    - name
+    - env(
+    - random
+    - TODO
+    - data
+    - $NOTIFY_SLACK_WEBHOOK
+    - NOTUSED
+    - '123123'
+    - function
+    - this[
+    - offset
