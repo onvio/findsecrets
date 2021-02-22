@@ -1,9 +1,15 @@
 scanfolder:
-  - 'samples/fileswithsecrets'
+  # - /src
 settings:
   - levenshtein-distance: 20
   - max-filesize-kb: 1024
   - min-value-length: 4
+sensitivevalues:
+  sensitivevalues:
+    - token
+    - value
+    - password
+    - _auth
 exclude:
   folders:
     - vendor
@@ -32,6 +38,8 @@ exclude:
     - .csproj
     - .gz
     - .zip
+    - .so
+    - .dex
   values:
     - none
     - 'true'
@@ -62,4 +70,10 @@ exclude:
     - '123123'
     - function
     - this[
+    - this
     - offset
+    - readBytes
+    - retrofit2.http.Headers
+    - com.crashlytics.ApiKey
+    - Preconditions
+    - EMPTY_BYTES
