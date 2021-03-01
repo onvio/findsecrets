@@ -7,24 +7,26 @@ from yaml import safe_load
 from pathlib import Path
 import argparse
 import json
+import shutil
+import os
 
 if sys.version_info < (3, 0):
     sys.stdout.write("Sorry, findsecrets requires Python 3.x\n")
     sys.exit(1)
 
 parser = argparse.ArgumentParser('findsecrets.py', formatter_class=lambda prog: argparse.HelpFormatter(prog, max_help_position=40))
-parser.add_argument('-f', '--folder', help='Folder to scan', dest='folder', required=False)
+parser.add_argument('-f', '--folder', help='Source folder to scan', dest='folder', required=False)
 parser.add_argument('-m', '--mask', help='Mask Secret Values', dest='mask', action='store_true', default=False)
 parser.add_argument('-v', '--verbose', help='Verbose output in stdout', dest='verbose', action='store_true', default=False)
+parser.add_argument('-r', '--reportpath', help='If specified, copy reports to specified folder', dest='reportpath', required=False)
 args = parser.parse_args()
 
-
+# Load Configs
 def yamlconfig(configyml=Path('config.yml')):
     yamldict = safe_load(configyml.read_text())
     if not isinstance(yamldict, dict):
         return dict()
     return yamldict
-
 
 config = yamlconfig()
 
@@ -35,6 +37,7 @@ else:
         scanfolder = config['scanfolder'][0]
     except:
         print("Findsecrets failed... Scanfolder not specified")
+        parser.print_help()
         sys.exit(1)
 
 keywordsdb = 'db/positivekeywords.txt'
@@ -113,13 +116,11 @@ def find_keywords_with_values_in_file(file):
     try:
         file = open(file, 'r', encoding='utf8')
     except:
-        pass # File Open Error
-    # Read each lines from file & remove empty lines
+        pass
     try:
         for line in file:
             line = line.strip()
             if line != '':
-                # Get all match groups within line string
                 matches = re.findall(assignment_pattern, line, re.IGNORECASE)
                 if matches:
                     for i in matches:
@@ -177,9 +178,18 @@ def seqhubreport(foundsecrets):
         json.dump(jsonobject, f, indent=4)
 
 
+def move_reports():
+    reports = ['seqhubreport.json', 'report.json']
+    for report in reports:
+        shutil.move(os.path.join(os.getcwd(), report), os.path.join(args.reportpath, report))
+
+
 filepaths = spiderfolder(scanfolder)
 for scannedfile in filepaths:
     find_keywords_with_values_in_file(scannedfile)
 
 jsonreport(foundsecrets)
 seqhubreport(foundsecrets)
+
+if args.reportpath:
+    move_reports()
