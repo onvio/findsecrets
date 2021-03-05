@@ -6,6 +6,7 @@ value
 SECRET_KEY
 google_api_key_auth
 OPTIMIZELY_SDK_KEY
+EncryptionKey
 app_password
 npm_authToken
 encryptedPassword
