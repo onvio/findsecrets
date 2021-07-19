@@ -14,9 +14,16 @@ Only works with Python 3.x
 optional arguments:
   -h, --help                    show this help message and exit
   -f, --folder FOLDER           Local Folder to scan / Cloned Repo
+  -e, --exclude                 Comma separated list of files to exclude
   -m, --mask                    Mask Secrets (Default = False)
   -v, --verbose                 Verbose output, shows secrets in STDOUT / Console (Default = False)
 ```
+
+Docker
+
+```
+docker pull seqhub/findsecrets
+docker run --rm -v $(pwd):/wrk -t seqhub/findsecrets -f /wrk -r /wrk/findsecrets-reports -v
 
 ## Reports
 Reports are automatically saved in the current folder:

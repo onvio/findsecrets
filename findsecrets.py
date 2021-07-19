@@ -16,6 +16,7 @@ if sys.version_info < (3, 0):
 
 parser = argparse.ArgumentParser('findsecrets.py', formatter_class=lambda prog: argparse.HelpFormatter(prog, max_help_position=40))
 parser.add_argument('-f', '--folder', help='Source folder to scan', dest='folder', required=False)
+parser.add_argument('-e', '--exclude', help='Comma separated list of files to exclude', dest='exclude', required=False)
 parser.add_argument('-m', '--mask', help='Mask Secret Values', dest='mask', action='store_true', default=False)
 parser.add_argument('-v', '--verbose', help='Verbose output in stdout', dest='verbose', action='store_true', default=False)
 parser.add_argument('-r', '--reportpath', help='If specified, copy reports to specified folder', dest='reportpath', required=False)
@@ -26,6 +27,12 @@ def yamlconfig(configyml=Path('config.yml')):
     yamldict = safe_load(configyml.read_text())
     if not isinstance(yamldict, dict):
         return dict()
+
+    if args.exclude:
+        exclude_files = map(str.strip, args.exclude.split(','))
+        for file in exclude_files:
+            yamldict['exclude']['files'].append(file)
+
     return yamldict
 
 config = yamlconfig()
