@@ -17,6 +17,7 @@ optional arguments:
   -e, --exclude                 Comma separated list of files to exclude
   -m, --mask                    Mask Secrets (Default = False)
   -v, --verbose                 Verbose output, shows secrets in STDOUT / Console (Default = False)
+  -r                            Save the output to a report instead of STDOUT
 ```
 
 Docker
